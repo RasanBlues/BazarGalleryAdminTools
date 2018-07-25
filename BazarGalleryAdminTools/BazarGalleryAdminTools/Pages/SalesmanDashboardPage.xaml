@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BazarGalleryAdminTools.Pages.SalesmanDashboardPage"
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <Style TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Color" Value="Accent"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Margin" Value="20,0"/>
+        </Style>
+    </ContentPage.Resources>
+    <!--<ScrollView>-->
+    <StackLayout Margin="10,20" VerticalOptions="FillAndExpand">
+        <Label Margin="0" Text="تۆمارەکان" Style="{StaticResource HeaderLabel}"/>
+        <Label HorizontalOptions="Start" Text="{Binding SubmittedShopsCount, StringFormat='{}{0}  دوکان پێشنیارکراون'}"/>
+        <Label HorizontalOptions="Start" Text="{Binding ReviewedShopsCount, StringFormat='{}{0}  دوکان پێداچوونەوەی بۆ کراوە'}" TextColor="CornflowerBlue"/>
+        <Label HorizontalOptions="Start"  Text="{Binding ApprovedShopsCount, StringFormat='{}{0}  دوکان وەرگیراوە'}" TextColor="Green"/>
+        <Label HorizontalOptions="Start" Text="{Binding DeclinedShopsCount, StringFormat='{}{0}  دوکان وەرنەگیراوە'}" TextColor="OrangeRed"/>
+        <BoxView/>
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.Username}" FontSize="Large"/>
+            <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.PhoneNumber}"/>
+            <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.ID}" FontSize="Micro"/>
+            <Button Text="چوونەدەرەوە" Margin="20" FontSize="20"  Command="{Binding LogoutCommand}" IsEnabled="{Binding CanLogout}"/>
+        </StackLayout>
+    </StackLayout>
+    <!--</ScrollView>-->
+</ContentPage>

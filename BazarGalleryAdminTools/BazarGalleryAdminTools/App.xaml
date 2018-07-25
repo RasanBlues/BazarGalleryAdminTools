@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:bazargallery="clr-namespace:BazarGallery"
+             x:Class="BazarGalleryAdminTools.App">
+    <Application.Resources>
+        <Color x:Key="PrimaryColor">#2196F3</Color>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor">Color.Accent</Setter>
+            <Setter Property="TextColor">#FFFFFF</Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="CancelButton">
+            <Setter Property="BackgroundColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="Text" Value="گەڕانەوە"/>
+        </Style>
+        <Style TargetType="Label" x:Key="HeaderLabel">
+            <Setter Property="TextColor" Value="#222222"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        <Style TargetType="ActivityIndicator">
+            <Setter Property="Color" Value="White"/>
+            <Setter Property="IsRunning" Value="True"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style TargetType="ffimageloading:CachedImage">
+            <Setter Property="ErrorPlaceholder" Value="empty_image.png"/>
+            <Setter Property="LoadingPlaceholder" Value="downloading_placeholder.png"/>
+        </Style>
+        <ResourceDictionary>
+            <bazargallery:NotBoolConverter x:Key="NotBoolConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

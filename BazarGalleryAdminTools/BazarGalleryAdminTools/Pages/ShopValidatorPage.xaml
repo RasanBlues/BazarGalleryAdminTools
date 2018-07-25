@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+            xmlns:controls="clr-namespace:BazarGallery.Controls"
+            xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+            x:Class="BazarGalleryAdminTools.Pages.ShopValidatorPage" 
+            NavigationPage.HasNavigationBar="False"
+            FlowDirection="RightToLeft">
+    <TabbedPage.Resources>
+        <Style TargetType="BoxView">
+            <Setter Property="Color" Value="Accent"/>
+            <Setter Property="HeightRequest" Value="1"/>
+        </Style>
+        <Style TargetType="Label" x:Key="ContactLabel">
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10,0,3"/>
+        </Style>
+    </TabbedPage.Resources>
+    <ContentPage Title="داتا">
+        <Grid>
+            <ScrollView IsVisible="{Binding IsBusy,Converter={StaticResource Key=NotBoolConverter}}">
+                <StackLayout Margin="10,20" Spacing="5">
+                    <Label Text="{Binding Path=Shop.KurdishName}" FontSize="30" HorizontalTextAlignment="Center" TextColor="Black"/>
+                    <Label Text="{Binding Path=UserDetails}" FontSize="Medium" HorizontalTextAlignment="Center"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="پێناس و ئیش" TextColor="White"/>
+                    </Frame>
+                    <Label Text="{Binding Shop.KurdishDescription}"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="پەیوەندی" TextColor="White"/>
+                    </Frame>
+                    <Grid  Margin="0,5,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Grid.RowSpacing>0</Grid.RowSpacing>
+
+                        <Label Text="ناوی خاوەن" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" />
+                        <Label Text="ژمارەی تەلەفۆن" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
+
+                        <Label Text="{Binding Shop.Phone1_Owner}" Style="{StaticResource ContactLabel}" Grid.Column="0" Grid.Row="1"/>
+                        <Label Text="{Binding Shop.Phone1}" Style="{StaticResource ContactLabel}"  Grid.Column="1" Grid.Row="1"/>
+                        <BoxView Color="Accent" Grid.Row="2" Grid.ColumnSpan="2" HeightRequest="1"/>
+
+                        <Label Text="{Binding Shop.Phone2_Owner}" Style="{StaticResource ContactLabel}" Grid.Column="0" Grid.Row="3"/>
+                        <Label Text="{Binding Shop.Phone2}" Style="{StaticResource ContactLabel}" Grid.Column="1" Grid.Row="3"/>
+                        <BoxView Color="Accent" Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="1"/>
+
+                        <Label Text="{Binding Shop.Phone3_Owner}" Style="{StaticResource ContactLabel}" Grid.Column="0" Grid.Row="5"/>
+                        <Label Text="{Binding Shop.Phone3}" Style="{StaticResource ContactLabel}" Grid.Column="1" Grid.Row="5"/>
+                        <BoxView Color="Accent" Grid.Row="6" Grid.ColumnSpan="2" HeightRequest="1"/>
+                    </Grid>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="بوارەکان" TextColor="White"/>
+                    </Frame>
+                    <Label x:Name="UISubcategoriesLabel" Margin="0,5,0,5"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4" >
+                        <Label Text="خزمەتگوزاریەکان" TextColor="White"/>
+                    </Frame>
+                    <StackLayout x:Name="UIServicesStack" Margin="0,0,0,5"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="تۆڕی کۆمەڵایەتی" TextColor="White"/>
+                    </Frame>
+                    <Label Text="ئیمەیڵ" VerticalTextAlignment="End" Margin="0,5,0,0"/>
+                    <Label Text="{Binding Shop.Email}"/>
+                    <BoxView Color="Accent" HeightRequest="1"/>
+                    <Grid Margin="0,5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0">
+
+                            <Label Text="فەیسبووک" Grid.Row="0" Grid.Column="0"/>
+                            <Label Text="{Binding Shop.Facebook}" Grid.Row="1" Grid.Column="0"/>
+                            <BoxView/>
+
+                            <Label Text="ئینستاگرام"/>
+                            <Label Text="{Binding Shop.Instagram}"/>
+                            <BoxView/>
+
+                            <Label Text="سناپچات"/>
+                            <Label Text="{Binding Shop.Snapchat}"/>
+                            <BoxView/>
+
+                        </StackLayout>
+                        <StackLayout Grid.Column="1">
+
+                            <Label Text="تویتەر"/>
+                            <Label Text="{Binding Shop.Twitter}"/>
+                            <BoxView Grid.Row="2" Grid.Column="0"/>
+
+                            <Label Text="یوتیوب"/>
+                            <Label Text="{Binding Shop.YouTube}"/>
+                            <BoxView/>
+
+                            <Label Text="وێبسایت"/>
+                            <Label Text="{Binding Shop.Website}"/>
+                            <BoxView/>
+
+                        </StackLayout>
+                    </Grid>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="کاتی کارکردن" TextColor="White"/>
+                    </Frame>
+                    <Grid x:Name="UITimeGrid" Margin="20,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label TextColor="{Binding SatColor}" Text="شەممە" Grid.Column="0" Grid.Row="0"/>
+                        <Label TextColor="{Binding SatColor}" Text="{Binding WorkingHours.SatFrom}" Grid.Column="1" Grid.Row="0"/>
+                        <Label TextColor="{Binding SatColor}" Text="{Binding WorkingHours.SatTo}" Grid.Column="2" Grid.Row="0"/>
+
+                        <Label TextColor="{Binding SunColor}" Text="١ شەممە" Grid.Column="0" Grid.Row="1"/>
+                        <Label TextColor="{Binding SunColor}" Text="{Binding WorkingHours.SunFrom}" Grid.Column="1" Grid.Row="1"/>
+                        <Label TextColor="{Binding SunColor}" Text="{Binding WorkingHours.SunTo}" Grid.Column="2" Grid.Row="1"/>
+
+                        <Label TextColor="{Binding MonColor}"  Text="٢ شەممە" Grid.Column="0" Grid.Row="2"/>
+                        <Label TextColor="{Binding MonColor}" Text="{Binding WorkingHours.MonFrom}" Grid.Column="1" Grid.Row="2"/>
+                        <Label TextColor="{Binding MonColor}" Text="{Binding WorkingHours.MonTo}" Grid.Column="2" Grid.Row="2"/>
+
+                        <Label TextColor="{Binding TueColor}"  Text="٣ شەممە" Grid.Column="0" Grid.Row="3"/>
+                        <Label TextColor="{Binding TueColor}" Text="{Binding WorkingHours.TueFrom}" Grid.Column="1" Grid.Row="3"/>
+                        <Label TextColor="{Binding TueColor}" Text="{Binding WorkingHours.TueTo}" Grid.Column="2" Grid.Row="3"/>
+
+                        <Label TextColor="{Binding WedColor}" Text="٤ شەممە" Grid.Column="0" Grid.Row="4"/>
+                        <Label TextColor="{Binding WedColor}" Text="{Binding WorkingHours.WedFrom}" Grid.Column="1" Grid.Row="4"/>
+                        <Label TextColor="{Binding WedColor}" Text="{Binding WorkingHours.WedTo}" Grid.Column="2" Grid.Row="4"/>
+
+                        <Label TextColor="{Binding ThuColor}" Text="٥ شەممە" Grid.Column="0" Grid.Row="5"/>
+                        <Label TextColor="{Binding ThuColor}" Text="{Binding WorkingHours.ThuFrom}" Grid.Column="1" Grid.Row="5"/>
+                        <Label TextColor="{Binding ThuColor}" Text="{Binding WorkingHours.ThuTo}" Grid.Column="2" Grid.Row="5"/>
+
+                        <Label TextColor="{Binding FriColor}" Text="هەینی" Grid.Column="0" Grid.Row="6"/>
+                        <Label TextColor="{Binding FriColor}" Text="{Binding WorkingHours.FriFrom}" Grid.Column="1" Grid.Row="6"/>
+                        <Label TextColor="{Binding FriColor}" Text="{Binding WorkingHours.FriTo}" Grid.Column="2" Grid.Row="6"/>
+
+                    </Grid>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="ناونیشان" TextColor="White"/>
+                    </Frame>
+                    <Label Margin="5,2" Text="{Binding Shop.KurdishAddress}"/>
+                    <controls:CustomMap x:Name="UIMapView" HeightRequest="250" Margin="0,0,0,10"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="کۆمێنت" TextColor="White"/>
+                    </Frame>
+                    <Editor Text="{Binding Shop.Data}" IsEnabled="{Binding CanValidate}"/>
+                    <Button Text="پەسەندکردن" Command="{Binding ApproveCommand}" IsVisible="{Binding CanValidate}"/>
+                    <Button Text="ڕەتکردنەوە" BackgroundColor="IndianRed" Command="{Binding RejectCommand}" IsVisible="{Binding CanValidate}"/>
+                    <Button Margin="0,0,0,20" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}"/>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}">
+                <ActivityIndicator.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="UWP" Value="FillAndExpand" />
+                        <On Platform="iOS, Android" Value ="Center"/>
+                    </OnPlatform>
+                </ActivityIndicator.HorizontalOptions>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="گەلەری">
+        <Grid>
+            <ScrollView IsVisible="{Binding IsBusy,Converter={StaticResource Key=NotBoolConverter}}">
+                <StackLayout Margin="10,20" Spacing="5">
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="وێنە" TextColor="White"/>
+                    </Frame>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="وێنەی کەڤەر" HorizontalTextAlignment="Center"/>
+                        <Frame Padding="0" Grid.Row="1">
+                            <ffimageloading:CachedImage DownsampleHeight="100" HeightRequest="100" Source="{Binding Shop.CoverImageLink}"/>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShopCoverImageTappedCommand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Label Text="وێنەی پڕۆفایل" HorizontalTextAlignment="Center" Grid.Column="1"/>
+                        <Frame Padding="0" Grid.Row="1" Grid.Column="1">
+                            <ffimageloading:CachedImage DownsampleHeight="100" HeightRequest="100" Source="{Binding Shop.ImageLink}"/>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShopImageTappedCommand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                    <StackLayout x:Name="UIAlbumsStack" Margin="5,10"/>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}">
+                <ActivityIndicator.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="UWP" Value="FillAndExpand" />
+                        <On Platform="iOS, Android" Value ="Center"/>
+                    </OnPlatform>
+                </ActivityIndicator.HorizontalOptions>
+            </ActivityIndicator>
+        </Grid>
+    </ContentPage>
+</TabbedPage>

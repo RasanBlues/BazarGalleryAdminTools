@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BazarGalleryAdminTools.Pages.AdminTabbedPaged"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage Title="داشبۆرد" FlowDirection="LeftToRight">
+        <ContentPage.Resources>
+            <Style TargetType="BoxView">
+                <Setter Property="Color" Value="Accent"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="5,0"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="20,0"/>
+                <Setter Property="LineBreakMode" Value="NoWrap"/>
+            </Style>
+        </ContentPage.Resources>
+        <ScrollView>
+            <StackLayout Margin="10,20">
+                <Label Style="{StaticResource HeaderLabel}" Margin="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Users" FontSize="30" FontAttributes="Bold"/>
+                            <Span x:Name ="UIUserCountSpan" FontSize="16"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="{Binding AdminsCount, StringFormat='{}{0} Admins'}"/>
+                <Label  Text="{Binding ModeratorsCount, StringFormat='{}{0} Moderators'}"/>
+                <Label Text="{Binding SalesmenCount, StringFormat='{}{0} Salesmen'}"/>
+                <Label Text="{Binding TranslatorsCount, StringFormat='{}{0} Translators'}"/>
+                <Label  Text="{Binding NormalUsersCount, StringFormat='{}{0} App Users'}"/>
+                <BoxView/>
+                <Label Style="{StaticResource HeaderLabel}" Margin="0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Shop" FontSize="30" FontAttributes="Bold"/>
+                            <Span x:Name ="UIShopCountSpan"  FontSize="16"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="{Binding NotReviewedCount, StringFormat='{}{0} Not Reviewed'}"/>
+                <Label Text="{Binding ApprovedCount, StringFormat='{}{0} Approved'}"/>
+                <Label Text="{Binding DeclinedCount, StringFormat='{}{0} Declined'}"/>
+                <BoxView/>
+                <Label Text="User Content" Style="{StaticResource HeaderLabel}" Margin="0"/>
+                <Label Text="{Binding AlbumsCount, StringFormat='{}{0} Albums'}"/>
+                <Label Text="{Binding ImagesCount, StringFormat='{}{0} Images'}"/>
+                <Label Text="{Binding ServiceDescriptionsCount, StringFormat='{}{0} Service Descriptions'}"/>
+                <BoxView/>
+                <Label Text="App Content" Style="{StaticResource HeaderLabel}" Margin="0"/>
+                <Label Text="{Binding CategoriesCount, StringFormat='{}{0} Categories'}"/>
+                <Label Text="{Binding SubcategoriesCount, StringFormat='{}{0} Subcategories'}"/>
+                <Label Text="{Binding KeywordsCount, StringFormat='{}{0} Keywords'}"/>
+                <Label Text="{Binding ServicesCount, StringFormat='{}{0} Services'}"/>
+                <BoxView/>
+                <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.Username}" FontSize="Large"/>
+                <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.PhoneNumber}"/>
+                <Label HorizontalTextAlignment="Center" Text="{Binding CurrentUser.ID}" FontSize="Micro"/>
+                <Button Text="چوونەدەرەوە" Command="{Binding LogoutCommand}" Margin="20"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>

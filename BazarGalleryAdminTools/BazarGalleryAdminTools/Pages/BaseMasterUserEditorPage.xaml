@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BazarGalleryAdminTools.Pages.BaseMasterUserEditorPage">
+    <Grid>
+        <ScrollView>
+            <StackLayout x:Name="UIStackLayout" Padding="30">
+                <Label Text="Name" Margin="0,5,0,0"/>
+                <Entry x:Name="UIUsernameEntry"/>
+                <Label Text="Phone Number" Margin="0,5,0,0"/>
+                <Entry x:Name="UIPhoneEntry" Keyboard="Numeric" MaxLength="11"/>
+                <Label Text="Password" Margin="0,5,0,0"/>
+                <Entry x:Name="UIPasswordEntry" IsPassword="True"/>
+                <Label Text="Confirm Password" Margin="0,5,0,0"/>
+                <Entry x:Name="UIConfirmPasswordEntry" IsPassword="True"/>
+                <StackLayout x:Name="UIEnglishTranslationLayout" Orientation="Horizontal" Margin="0,10,0,0" IsVisible="False">
+                    <Label Text="English"/>
+                    <Switch x:Name="UIEnglishSwitch" HorizontalOptions="EndAndExpand" IsToggled="True"/>
+                </StackLayout>
+                <StackLayout x:Name="UIArabicTranslationLayout" Orientation="Horizontal" IsVisible="False">
+                    <Label Text="Arabic"/>
+                    <Switch x:Name="UIArabicSwitch" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Label x:Name="UIPickerLabel" Text="Moderator" Margin="0,5,0,0" IsVisible="False"/>
+                <Picker x:Name="UIPicker" IsVisible="False" ItemsSource="{Binding PickerOptions}"/>
+                <Button Text="تۆمارکردن" Command="{Binding SaveCommand}" Margin="0,15,0,0"/>
+                <Button Text="گەڕانەوە" Command="{Binding CancelCommand}" TextColor="Black" BackgroundColor="LightGray"/>
+            </StackLayout>
+        </ScrollView>
+
+        <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+        <ActivityIndicator  IsVisible="{Binding IsBusy}">
+            <ActivityIndicator.HorizontalOptions>
+                <OnPlatform x:TypeArguments="LayoutOptions">
+                    <On Platform="UWP" Value="FillAndExpand" />
+                    <On Platform="iOS, Android" Value ="Center"/>
+                </OnPlatform>
+            </ActivityIndicator.HorizontalOptions>
+        </ActivityIndicator>
+    </Grid>
+</ContentPage>

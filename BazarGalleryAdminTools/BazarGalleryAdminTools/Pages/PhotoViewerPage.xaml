@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BazarGalleryAdminTools.Pages.PhotoViewerPage"
+             FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Image Grid.RowSpan="2" Source="{Binding AlbumImage.ImageSource}" HorizontalOptions="FillAndExpand" Aspect="AspectFit"/>
+
+            <StackLayout Grid.Row="1" BackgroundColor="#BF000000" Padding="20,5,20,5" IsVisible="{Binding AlbumImage.HasMetaData}">
+                <Label  TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding AlbumImage.Name}"/>
+                            <Span Text=": "/>
+                            <Span Text="{Binding AlbumImage.KurdishDescription}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label  TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="نرخ: "/>
+                            <Span Text="{Binding AlbumImage.Currency}"/>
+                            <Span Text=" "/>
+                            <Span Text="{Binding AlbumImage.Price}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

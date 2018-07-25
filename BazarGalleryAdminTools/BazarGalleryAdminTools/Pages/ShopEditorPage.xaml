@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="BazarGalleryAdminTools.Pages.ShopEditorPage"
+             FlowDirection="RightToLeft"
+             NavigationPage.HasNavigationBar="False"
+             Padding="0"
+             Title="دوکانی تازە">
+    <ContentPage Title="داتا">
+        <Grid>
+            <ScrollView>
+                <StackLayout Margin="10,20">
+                    <Label Text="خاوەنی: " x:Name="UIProviderNameLabel"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry Text="" x:Name="UIProviderPhoneEntry" Keyboard="Numeric" TextChanged="PhoneEntry_TextChanged" HorizontalOptions="FillAndExpand" MaxLength="11" />
+                        <Button Text="+" x:Name="UIAddProviderButton"  Command="{Binding AddProviderCommand}" HeightRequest="34" WidthRequest="35"/>
+                    </StackLayout>
+                    <Label Text="ناوی شوێن"/>
+                    <Entry Text="{Binding Shop.KurdishName}" />
+                    <Label Text="بوار" />
+                    <Grid x:Name="UICategoryGrid" Margin="0,5" />
+                    <StackLayout x:Name="UISubcategoryStack" >
+
+                    </StackLayout>
+                    <Frame Padding="6,4" BackgroundColor="Accent" >
+                        <Label Text="کیوۆردەکان" TextColor="White"/>
+                    </Frame>
+                    <Grid x:Name="UIKeywordsGrid" />
+
+                    <Frame BackgroundColor="Accent" Padding="6,4" >
+                        <Label Text="خزمەتگوزاریەکان" TextColor="White"/>
+                    </Frame>
+                    <StackLayout x:Name="UIServicesLayout" />
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="پێناس و ئیش" TextColor="White"/>
+                    </Frame>
+                    <Editor Text="{Binding Shop.KurdishDescription}" HeightRequest="100" />
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="پەیوەندی" TextColor="White"/>
+                    </Frame>
+                    <Grid x:Name="UIPhonesGrid">
+                        <Label Text="ناوی خاوەن" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="0" Grid.Row="0" />
+                        <Label Text="ژمارەی تەلەفۆن" VerticalTextAlignment="End" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="1" Grid.Row="0"/>
+
+                        <Entry Text="{Binding Shop.Phone1_Owner}" Grid.Column="0" Grid.Row="1" x:Name="UIShopPhoneNumberOwner1"/>
+                        <Entry Text="{Binding Shop.Phone1}" Grid.Column="1" Grid.Row="1" x:Name="UIShopPhoneNumber1" Keyboard="Numeric" MaxLength="11"/>
+
+                        <Entry Text="{Binding Shop.Phone2_Owner}" Grid.Column="0" Grid.Row="2" x:Name="UIShopPhoneNumberOwner2"/>
+                        <Entry Text="{Binding Shop.Phone2}" Grid.Column="1" Grid.Row="2" x:Name="UIShopPhoneNumber2" Keyboard="Numeric" MaxLength="11"/>
+
+                        <Entry Text="{Binding Shop.Phone3_Owner}" Grid.Column="0" Grid.Row="3" x:Name="UIShopPhoneNumberOwner3"/>
+                        <Entry Text="{Binding Shop.Phone3}" Grid.Column="1" Grid.Row="3" x:Name="UIShopPhoneNumber3" Keyboard="Numeric" MaxLength="11"/>
+                    </Grid>
+                    <Button Text="دواتر" Margin="0,0,0,20" Command="{Binding MoreTabCommand}" />
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}">
+                <ActivityIndicator.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="UWP" Value="FillAndExpand" />
+                        <On Platform="iOS, Android" Value ="Center"/>
+                    </OnPlatform>
+                </ActivityIndicator.HorizontalOptions>
+            </ActivityIndicator>
+            <Label Text="{Binding ProgressText}" TextColor="White" IsVisible="{Binding IsBusy}" Margin="10,65,10,0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="زیاتر">
+        <Grid>
+            <ScrollView>
+                <StackLayout Margin="10,20">
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="تایبەتمەندی شوێن" TextColor="White"/>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch x:Name="UISponsoredSwitch"/>
+                        <Label Text="سپۆنسەر" VerticalTextAlignment="Center" BindingContext="{x:Reference Name=UISponsoredSwitch}" IsEnabled="{Binding IsToggled}"/>
+                    </StackLayout>
+                    <Entry x:Name="UIShopPriority" Placeholder="Priority" Keyboard="Numeric" BindingContext="{x:Reference Name=UISponsoredSwitch}" IsVisible="{Binding IsToggled}"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="تۆڕی کۆمەڵایەتی" TextColor="White"/>
+                    </Frame>
+                    <Label Text="ئیمەیڵ" VerticalTextAlignment="End" Margin="0,5,0,0"/>
+                    <Entry Text="{Binding Shop.Email}" Keyboard="Email"/>
+                    <Grid>
+                        <StackLayout Grid.Column="0" Grid.Row="0">
+                            <Label Text="فەیسبووک"/>
+                            <Entry Text="{Binding Shop.Facebook}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="0">
+                            <Label Text="تویتەر"/>
+                            <Entry Text="{Binding Shop.Twitter}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="0" Grid.Row="1">
+                            <Label Text="ئینستاگرام"/>
+                            <Entry Text="{Binding Shop.Instagram}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="1">
+                            <Label Text="یوتیوب"/>
+                            <Entry Text="{Binding Shop.YouTube}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="0" Grid.Row="2">
+                            <Label Text="سناپچات"/>
+                            <Entry Text="{Binding Shop.Snapchat}"/>
+                        </StackLayout>
+                        <StackLayout Grid.Column="1" Grid.Row="2">
+                            <Label Text="وێبسایت"/>
+                            <Entry Text="{Binding Shop.Website}" Keyboard="Url"/>
+                        </StackLayout>
+                    </Grid>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="کاتی کارکردن" TextColor="White"/>
+                    </Frame>
+                    <Grid x:Name="UITimeGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                    <Button Text="Copy Time Info" Command="{Binding CopyTimeCommand}"/>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="ناونیشان" TextColor="White"/>
+                    </Frame>
+                    <Entry Text="{Binding Shop.KurdishAddress}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="0.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Switch x:Name="UIIsUsingCustomLocation" Grid.Column="0" Toggled="UIIsUsingCustomLocation_ToggledAsync"/>
+                        <Entry x:Name="UILocation_Lat" Completed="UILocation_Completed" Keyboard="Numeric" Grid.Column="1" BindingContext="{x:Reference Name=UIIsUsingCustomLocation}" IsEnabled="{Binding IsToggled}"/>
+                        <Entry x:Name="UILocation_Long" Completed="UILocation_Completed" Keyboard="Numeric" Grid.Column="2" BindingContext="{x:Reference Name=UIIsUsingCustomLocation}" IsEnabled="{Binding IsToggled}"/>
+                    </Grid>
+                    <maps:Map x:Name="UIMapView" HeightRequest="250"/>
+                    <Button Text="دواتر" Margin="0,15,0,20" Command="{Binding GalleryTabCommand}"/>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}">
+                <ActivityIndicator.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="UWP" Value="FillAndExpand" />
+                        <On Platform="iOS, Android" Value ="Center"/>
+                    </OnPlatform>
+                </ActivityIndicator.HorizontalOptions>
+            </ActivityIndicator>
+            <Label Text="{Binding ProgressText}" TextColor="White" IsVisible="{Binding IsBusy}" Margin="10,65,10,0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="گەلەری">
+        <Grid>
+            <ScrollView>
+                <StackLayout Margin="10,20">
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="وێنە" TextColor="White"/>
+                    </Frame>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="وێنەی کەڤەر" HorizontalTextAlignment="Center"/>
+                        <Frame Padding="0" Grid.Row="1">
+                            <ffimageloading:CachedImage DownsampleHeight="100" HeightRequest="100" Source="{Binding CoverImageSource}"/>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CoverImageTappedCommand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Label Text="وێنەی پڕۆفایل" HorizontalTextAlignment="Center" Grid.Column="1"/>
+                        <Frame Padding="0" Grid.Row="1" Grid.Column="1">
+                            <ffimageloading:CachedImage DownsampleHeight="100" HeightRequest="100" Source="{Binding ThumbnailImageSource}"/>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ThumbnailImageTappedCommand}"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </Grid>
+                    <Frame BackgroundColor="Accent" Padding="6,4">
+                        <Label Text="ئەلبوم" TextColor="White"/>
+                    </Frame>
+                    <StackLayout x:Name="UIAlbumsStack" Margin="10,5"/>
+                    <Button Text="هەڵگرتن" Margin="0,15,0,0" Command="{Binding SaveCommand}"/>
+                    <Button Margin="0,0,0,20" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}"/>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView BackgroundColor="Black" Opacity="0.8" IsVisible="{Binding IsBusy}"/>
+            <ActivityIndicator IsVisible="{Binding IsBusy}">
+                <ActivityIndicator.HorizontalOptions>
+                    <OnPlatform x:TypeArguments="LayoutOptions">
+                        <On Platform="UWP" Value="FillAndExpand" />
+                        <On Platform="iOS, Android" Value ="Center"/>
+                    </OnPlatform>
+                </ActivityIndicator.HorizontalOptions>
+            </ActivityIndicator>
+            <Label Text="{Binding ProgressText}" TextColor="White" IsVisible="{Binding IsBusy}" Margin="10,65,10,0" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+        </Grid>
+    </ContentPage>
+</TabbedPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BazarGalleryAdminTools.Pages.BaseGalleryItemEditorPage"
+             FlowDirection="RightToLeft">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Margin="20" Spacing="5" VerticalOptions="CenterAndExpand">
+                <Frame HeightRequest="160" WidthRequest="181" HorizontalOptions="Center" Margin="0,0,0,10" Padding="0">
+                    <Image Source="{Binding Image.ImageSource}"/>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ImageTappedCommand}"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Label Text="ناوی کاڵا" Margin="0,10,0,0" IsVisible="{Binding HasMetaData}"/>
+                <Entry Text="{Binding Image.KurdishName}" IsVisible="{Binding HasMetaData}"/>
+                <Label Text="نرخی کاڵا" Margin="0,5,0,0" IsVisible="{Binding HasMetaData}"/>
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding HasMetaData}">
+                    <Entry x:Name="UIItemPriceEntry" Text="{Binding Image.Price}" HorizontalOptions="FillAndExpand" Keyboard="Numeric"/>
+                    <Picker x:Name="UICurrencyPicker" WidthRequest="80">
+                        <Picker.Items>
+                            <x:String>دینار</x:String>
+                            <x:String>دۆلار</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </StackLayout>
+                <Label Text="پێناسی کاڵا" Margin="0,5,0,0" IsVisible="{Binding HasMetaData}"/>
+                <Editor x:Name="UIItemDescriptionEditor" Text="{Binding Image.KurdishDescription}" HeightRequest="80" IsVisible="{Binding HasMetaData}"/>
+                <Button Text="هەڵگرتن" Command="{Binding SaveCommand}" IsEnabled="{Binding CanSave}"/>
+                <Button Text="سڕینەوە" Command="{Binding DeleteCommand}" IsVisible="{Binding CanDelete}" BackgroundColor="IndianRed"/>
+                <Button Text="گەڕانەوە"  Command="{Binding CancelCommand}" IsVisible="{Binding CanCancel}" TextColor="Black" BackgroundColor="LightGray" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
